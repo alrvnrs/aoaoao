@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SettShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Supplierphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Deliverycost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Shopinformation" Relationship="SettShopModel.FK_Delivery_Shopinformation" FromRole="Delivery" ToRole="Shopinformation" />
+  </EntityType>
+  <EntityType Name="Owner_s">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ownerphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Contribution" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Registrationnumber" Type="Int32" Nullable="false" />
+    <Property Name="Registrationdate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Shopinformation" Relationship="SettShopModel.FK_Owner_s_Shopinformation" FromRole="Owner_s" ToRole="Shopinformation" />
+  </EntityType>
+  <EntityType Name="Shopinformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Shopphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Capital" Type="Int32" Nullable="false" />
+    <Property Name="Profile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Delivery" Relationship="SettShopModel.FK_Delivery_Shopinformation" FromRole="Shopinformation" ToRole="Delivery" />
+    <NavigationProperty Name="Owner_s" Relationship="SettShopModel.FK_Owner_s_Shopinformation" FromRole="Shopinformation" ToRole="Owner_s" />
+  </EntityType>
+  <EntityContainer Name="SettShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+    <EntitySet Name="Owner_s" EntityType="Self.Owner_s" />
+    <EntitySet Name="Shopinformation" EntityType="Self.Shopinformation" />
+    <AssociationSet Name="FK_Delivery_Shopinformation" Association="SettShopModel.FK_Delivery_Shopinformation">
+      <End Role="Shopinformation" EntitySet="Shopinformation" />
+      <End Role="Delivery" EntitySet="Delivery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Owner_s_Shopinformation" Association="SettShopModel.FK_Owner_s_Shopinformation">
+      <End Role="Shopinformation" EntitySet="Shopinformation" />
+      <End Role="Owner_s" EntitySet="Owner_s" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Delivery_Shopinformation">
+    <End Type="SettShopModel.Shopinformation" Role="Shopinformation" Multiplicity="1" />
+    <End Type="SettShopModel.Delivery" Role="Delivery" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shopinformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Owner_s_Shopinformation">
+    <End Type="SettShopModel.Shopinformation" Role="Shopinformation" Multiplicity="1" />
+    <End Type="SettShopModel.Owner_s" Role="Owner_s" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shopinformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Owner_s">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

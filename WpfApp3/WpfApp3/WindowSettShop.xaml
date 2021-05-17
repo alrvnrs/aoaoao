@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfApp3.WindowSettShop"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        mc:Ignorable="d"
+        Title="Редактирование" Height="450" Width="800">
+    
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <UniformGrid Columns="2">
+            <TextBlock>Продукт</TextBlock>
+            <ComboBox Name="FirstName" SelectedItem="{Binding Owner_s}" DisplayMemberPath="FirstName"></ComboBox>
+            <TextBlock>Материал</TextBlock>
+            <ComboBox Name="Name" SelectedItem="{Binding Name}" DisplayMemberPath="Name"></ComboBox>
+            <TextBlock>Сырьё</TextBlock>
+            <TextBox Text="{Binding Adress}" MaxLength="100"></TextBox>
+            <TextBlock Text="Оборудование"></TextBlock>
+            <TextBox Text="{Binding Shopphone}" MaxLength="100"></TextBox>
+            <TextBlock>Кадры</TextBlock>
+            <TextBox Text="{Binding Capital}" Name="Capital"></TextBox>
+            <TextBlock>Амартизационный период</TextBlock>
+            <TextBox Text="{Binding Profile}" MaxLength="100"></TextBox>
+        </UniformGrid>
+        <Button x:Name="BtnSave" Grid.Row="1" Click="BtnSave_Click">Сохранить</Button>
+    </Grid>
+</Window>

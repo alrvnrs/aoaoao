@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище SettShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Supplierphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Deliverycost" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owner's">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ownerphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contribution" Type="money" Nullable="false" />
+          <Property Name="Registrationnumber" Type="int" Nullable="false" />
+          <Property Name="Registrationdate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shopinformation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Shopphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Capital" Type="int" Nullable="false" />
+          <Property Name="Profile" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Delivery_Shopinformation">
+          <End Role="Shopinformation" Type="Self.Shopinformation" Multiplicity="1" />
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shopinformation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner's_Shopinformation">
+          <End Role="Shopinformation" Type="Self.Shopinformation" Multiplicity="1" />
+          <End Role="Owner's" Type="Self.Owner's" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shopinformation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Owner's">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SettShopModelContainer">
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner's" EntityType="Self.Owner's" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shopinformation" EntityType="Self.Shopinformation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Delivery_Shopinformation" Association="Self.FK_Delivery_Shopinformation">
+            <End Role="Shopinformation" EntitySet="Shopinformation" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner's_Shopinformation" Association="Self.FK_Owner's_Shopinformation">
+            <End Role="Shopinformation" EntitySet="Shopinformation" />
+            <End Role="Owner's" EntitySet="Owner's" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SettShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Supplierphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deliverycost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Shopinformation" Relationship="SettShopModel.FK_Delivery_Shopinformation" FromRole="Delivery" ToRole="Shopinformation" />
+        </EntityType>
+        <EntityType Name="Owner_s">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ownerphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contribution" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Registrationnumber" Type="Int32" Nullable="false" />
+          <Property Name="Registrationdate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Shopinformation" Relationship="SettShopModel.FK_Owner_s_Shopinformation" FromRole="Owner_s" ToRole="Shopinformation" />
+        </EntityType>
+        <EntityType Name="Shopinformation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Shopphone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capital" Type="Int32" Nullable="false" />
+          <Property Name="Profile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="SettShopModel.FK_Delivery_Shopinformation" FromRole="Shopinformation" ToRole="Delivery" />
+          <NavigationProperty Name="Owner_s" Relationship="SettShopModel.FK_Owner_s_Shopinformation" FromRole="Shopinformation" ToRole="Owner_s" />
+        </EntityType>
+        <EntityContainer Name="SettShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+          <EntitySet Name="Owner_s" EntityType="Self.Owner_s" />
+          <EntitySet Name="Shopinformation" EntityType="Self.Shopinformation" />
+          <AssociationSet Name="FK_Delivery_Shopinformation" Association="SettShopModel.FK_Delivery_Shopinformation">
+            <End Role="Shopinformation" EntitySet="Shopinformation" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Owner_s_Shopinformation" Association="SettShopModel.FK_Owner_s_Shopinformation">
+            <End Role="Shopinformation" EntitySet="Shopinformation" />
+            <End Role="Owner_s" EntitySet="Owner_s" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Delivery_Shopinformation">
+          <End Type="SettShopModel.Shopinformation" Role="Shopinformation" Multiplicity="1" />
+          <End Type="SettShopModel.Delivery" Role="Delivery" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shopinformation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Owner_s_Shopinformation">
+          <End Type="SettShopModel.Shopinformation" Role="Shopinformation" Multiplicity="1" />
+          <End Type="SettShopModel.Owner_s" Role="Owner_s" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shopinformation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Owner_s">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SettShopModelContainer" CdmEntityContainer="SettShopEntities">
+          <EntitySetMapping Name="Delivery">
+            <EntityTypeMapping TypeName="SettShopModel.Delivery">
+              <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Supplierphone" ColumnName="Supplierphone" />
+                <ScalarProperty Name="Deliverycost" ColumnName="Deliverycost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner_s">
+            <EntityTypeMapping TypeName="SettShopModel.Owner_s">
+              <MappingFragment StoreEntitySet="Owner's">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Ownerphone" ColumnName="Ownerphone" />
+                <ScalarProperty Name="Contribution" ColumnName="Contribution" />
+                <ScalarProperty Name="Registrationnumber" ColumnName="Registrationnumber" />
+                <ScalarProperty Name="Registrationdate" ColumnName="Registrationdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shopinformation">
+            <EntityTypeMapping TypeName="SettShopModel.Shopinformation">
+              <MappingFragment StoreEntitySet="Shopinformation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Shopphone" ColumnName="Shopphone" />
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Profile" ColumnName="Profile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

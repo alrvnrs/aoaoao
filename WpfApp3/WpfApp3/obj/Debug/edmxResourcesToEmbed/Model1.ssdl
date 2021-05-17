@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище SettShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Delivery">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Supplierphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Deliverycost" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Owner's">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Ownerphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Contribution" Type="money" Nullable="false" />
+    <Property Name="Registrationnumber" Type="int" Nullable="false" />
+    <Property Name="Registrationdate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Shopinformation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Shopphone" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Capital" Type="int" Nullable="false" />
+    <Property Name="Profile" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Delivery_Shopinformation">
+    <End Role="Shopinformation" Type="Self.Shopinformation" Multiplicity="1" />
+    <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shopinformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Delivery">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Owner's_Shopinformation">
+    <End Role="Shopinformation" Type="Self.Shopinformation" Multiplicity="1" />
+    <End Role="Owner's" Type="Self.Owner's" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Shopinformation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Owner's">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище SettShopModelContainer">
+    <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Owner's" EntityType="Self.Owner's" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shopinformation" EntityType="Self.Shopinformation" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Delivery_Shopinformation" Association="Self.FK_Delivery_Shopinformation">
+      <End Role="Shopinformation" EntitySet="Shopinformation" />
+      <End Role="Delivery" EntitySet="Delivery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Owner's_Shopinformation" Association="Self.FK_Owner's_Shopinformation">
+      <End Role="Shopinformation" EntitySet="Shopinformation" />
+      <End Role="Owner's" EntitySet="Owner's" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
